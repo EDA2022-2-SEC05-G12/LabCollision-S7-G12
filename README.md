@@ -31,8 +31,6 @@ This is the repository for the seventh laboratory. In here the students learn ho
 <!-- GROUP MEMBERS -->
 ## Members
 
-The students edit this section to add their names, Uniandes emails, and specify which project functionality of the project they will implement.
-
 Samuel Ramirez, 202123423, s.ramirezg23@uniandes.edu.co, 
 
 Alejandro Villa, 201914850, fa.villa@uniandes.edu.co,
