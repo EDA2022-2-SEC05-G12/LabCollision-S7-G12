@@ -111,11 +111,27 @@ def printBooksbyYear(answer):
 
 
 def printBestBooks(books):
-    """
-    Imprime la información de los mejores libros
-    por promedio
-    """
-    # TODO: lab 7, completar la impresión de ranking de libros
+    if isinstance(answer,(list,tuple)) is True:
+        if len(answer) == 2:
+            books = answer [0]
+            time = answer [1]
+            print ("Tiempo [ms]: ", f"{time: .3f}")
+        elif len(answer) == 3:
+            books = answer [0]
+            time = answer [1]
+            memory = answer [2]
+            print ("Tiempo (MS): ", f"{time: .3f}", "||", "Memoria (KB): ", f"{memory:.3f}")
+        size = lt.size(books)
+        if size:
+            print ("Estos son los mejores libros")
+            for book in lt.iterator(books):
+                print ("Titulo:", book["title"],
+                       "ISBN: ", book["ISBN"],
+                       "Rating: ", book['average_rating'])
+            print ("\n")
+    else:
+        print ("No se encontraron libros. \n")
+  
     pass
 
 
@@ -186,25 +202,31 @@ while True:
         ctrlr = newController()
 
     elif int(inputs[0]) == 2:
-        # TODO: lab 7, parametros para observar el tiempo y memoria
         print("Cargando información de los archivos ....")
         print("Desea observar el uso de memoria? (True/False)")
+        t1 = getTime()
         mem = input("Respuesta: ")
         mem = castBoolean(mem)
         answer = controller.loadData(ctrlr, memflag=mem)
+        print ("Uso de Memoria: " + str(mem))
         print('Libros cargados: ' + str(controller.booksSize(ctrlr)))
         print('Autores cargados: ' + str(controller.authorsSize(ctrlr)))
         print('Géneros cargados: ' + str(controller.tagsSize(ctrlr)))
         printLoadDataAnswer(answer)
+        t2 = getTime()
+        print (deltaTime(t2, t1))
 
-    elif int(inputs[0]) == 3:
-        # TODO: lab 7, parametros observar el tiempo y memoria
+     elif int(inputs[0]) == 3:
         number = input("Buscando libros del año?: ")
         print("Desea observar el uso de memoria? (True/False)")
+        t1 = getTime()
         mem = input("Respuesta: ")
         mem = castBoolean(mem)
         answer = controller.getBooksYear(ctrlr, int(number), memflag=mem)
+        print ("Uso de Memoria: " + str(mem))
         printBooksbyYear(answer)
+        t2 = getTime()
+        print (deltaTime(t2, t1))
 
     elif int(inputs[0]) == 4:
         authorname = input("Nombre del autor a buscar: ")
@@ -217,8 +239,15 @@ while True:
         printBooksbyTag(books)
 
     elif int(inputs[0]) == 6:
-        # TODO lab 7, completar cambios para imprimir respuesta
-        pass
+        number = input ("Digite el año del cual desea buscar libros")
+        rank = input ("Cuanto quiere que sea la cantidad de numeros en el ranking?")
+        number = int(number)
+        rank = int(rank)
+        print ("Desea observar el uso de memoria? (True o False)")
+        mem = input ("Respuesta: ")
+        mem = castBoolean (mem)
+        answer = controller.sortBooksByYear(ctrlr,number,rank,memflag = mem)
+        printBestBooks(answer)
 
     elif int(inputs[0]) == 0:
         break
