@@ -20,6 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+from gettext import Catalog
 import config as cf
 import sys
 import controller
@@ -204,7 +205,8 @@ while True:
     elif int(inputs[0]) == 2:
         print("Cargando información de los archivos ....")
         print("Desea observar el uso de memoria? (True/False)")
-        t1 = getTime()
+        t1 = controller.getTime()
+        print(t1)
         mem = input("Respuesta: ")
         mem = castBoolean(mem)
         answer = controller.loadData(ctrlr, memflag=mem)
@@ -213,20 +215,21 @@ while True:
         print('Autores cargados: ' + str(controller.authorsSize(ctrlr)))
         print('Géneros cargados: ' + str(controller.tagsSize(ctrlr)))
         printLoadDataAnswer(answer)
-        t2 = getTime()
-        print (deltaTime(t2, t1))
+        t2 = controller.getTime()
+        print(Catalog)
+        print (controller.deltaTime(t2, t1))
 
-     elif int(inputs[0]) == 3:
+    elif int(inputs[0]) == 3:
         number = input("Buscando libros del año?: ")
         print("Desea observar el uso de memoria? (True/False)")
-        t1 = getTime()
+        t1 = controller.getTime()
         mem = input("Respuesta: ")
         mem = castBoolean(mem)
         answer = controller.getBooksYear(ctrlr, int(number), memflag=mem)
         print ("Uso de Memoria: " + str(mem))
         printBooksbyYear(answer)
-        t2 = getTime()
-        print (deltaTime(t2, t1))
+        t2 = controller.getTime()
+        print (controller.deltaTime(t2, t1))
 
     elif int(inputs[0]) == 4:
         authorname = input("Nombre del autor a buscar: ")
@@ -255,3 +258,4 @@ while True:
     else:
         continue
 sys.exit(0)
+
